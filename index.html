@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sanchit Pandey — Software Engineer</title>
-<meta name="description" content="Software Engineer building backend systems, mobile apps, and ML infrastructure. BITS Pilani graduate with production experience in Go, Python, PyTorch, and Flutter.">
-<meta property="og:title" content="Sanchit Pandey — Software Engineer">
-<meta property="og:description" content="Software Engineer building backend systems, mobile apps, and ML infrastructure.">
+<title>Sanchit Pandey — AI/ML Engineer & Researcher</title>
+<meta name="description" content="AI/ML Engineer and researcher. First-author at ACL ARR 2026. Builds LLM systems, RL training pipelines, and production backends. BITS Pilani.">
+<meta property="og:title" content="Sanchit Pandey — AI/ML Engineer & Researcher">
+<meta property="og:description" content="First-author researcher at ACL ARR 2026. Builds LLM systems, RL training pipelines, and production backends.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sanchit Pandey — Software Engineer">
-<meta name="twitter:description" content="Software Engineer building backend systems, mobile apps, and ML infrastructure.">
+<meta name="twitter:title" content="Sanchit Pandey — AI/ML Engineer & Researcher">
+<meta name="twitter:description" content="First-author researcher at ACL ARR 2026. Builds LLM systems, RL training pipelines, and production backends.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23d4a04a'/><text x='50' y='68' font-family='Georgia,serif' font-size='52' font-weight='bold' fill='%231a1a1a' text-anchor='middle'>SP</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,6 +44,8 @@
   --nav-bg: rgba(14, 14, 14, 0.85);
   --tag-bg: rgba(212, 160, 74, 0.1);
   --tag-text: #d4a04a;
+  --pub-bg: rgba(212, 160, 74, 0.05);
+  --pub-border: rgba(212, 160, 74, 0.2);
 }
 
 [data-theme="light"] {
@@ -65,6 +67,8 @@
   --nav-bg: rgba(250, 248, 245, 0.85);
   --tag-bg: rgba(184, 134, 45, 0.08);
   --tag-text: #96700e;
+  --pub-bg: rgba(184, 134, 45, 0.04);
+  --pub-border: rgba(184, 134, 45, 0.25);
 }
 
 /* ── Reset & Base ── */
@@ -339,7 +343,7 @@ a:hover { opacity: 0.8; }
 .hero-tagline {
   font-size: clamp(1rem, 2.2vw, 1.25rem);
   color: var(--text-secondary);
-  max-width: 580px;
+  max-width: 620px;
   line-height: 1.6;
   margin-bottom: 40px;
   opacity: 0;
@@ -354,6 +358,28 @@ a:hover { opacity: 0.8; }
   margin-left: 2px;
   vertical-align: text-bottom;
   animation: blink 1s infinite;
+}
+
+/* Publication badge in hero */
+.hero-pub-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--pub-bg);
+  border: 1px solid var(--pub-border);
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-bottom: 32px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  opacity: 0;
+  animation: fadeUp 0.6s var(--ease-out) 0.45s forwards;
+}
+.hero-pub-badge::before {
+  content: '📄';
+  font-size: 0.85rem;
 }
 
 @keyframes blink {
@@ -512,11 +538,157 @@ a:hover { opacity: 0.8; }
 }
 
 /* ═══════════════════════════════════════
+   PUBLICATIONS
+═══════════════════════════════════════ */
+.publications {
+  padding: 100px 0;
+  background: var(--bg-secondary);
+}
+
+.pub-card {
+  background: var(--bg-card);
+  border: 1px solid var(--pub-border);
+  border-radius: 16px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.pub-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.pub-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.pub-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-dim);
+  padding: 4px 12px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.pub-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pub-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+.pub-authors {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.pub-authors strong {
+  color: var(--accent);
+}
+
+.pub-abstract {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 24px;
+  max-width: 820px;
+}
+
+.pub-findings {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.pub-finding {
+  background: var(--pub-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.pub-finding .finding-stat {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.pub-finding .finding-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.pub-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.pub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.pub-link:hover {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+  opacity: 1;
+}
+.pub-link svg { width: 14px; height: 14px; }
+
+@media (max-width: 768px) {
+  .pub-card { padding: 24px; }
+  .pub-findings { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════════
    EXPERIENCE
 ═══════════════════════════════════════ */
 .experience {
   padding: 120px 0;
-  background: var(--bg-secondary);
 }
 
 .exp-timeline {
@@ -634,6 +806,7 @@ a:hover { opacity: 0.8; }
 ═══════════════════════════════════════ */
 .projects {
   padding: 120px 0;
+  background: var(--bg-secondary);
 }
 
 .featured-project {
@@ -830,7 +1003,6 @@ a:hover { opacity: 0.8; }
 ═══════════════════════════════════════ */
 .leadership {
   padding: 100px 0;
-  background: var(--bg-secondary);
 }
 
 .leadership-grid {
@@ -875,6 +1047,7 @@ a:hover { opacity: 0.8; }
 ═══════════════════════════════════════ */
 .contact {
   padding: 120px 0;
+  background: var(--bg-secondary);
 }
 
 .contact-inner {
@@ -960,6 +1133,7 @@ a:hover { opacity: 0.8; }
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
+      <li><a href="#publications">Research</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -983,6 +1157,7 @@ a:hover { opacity: 0.8; }
   <div class="container hero-content">
     <p class="hero-greeting">Hi, I'm</p>
     <h1 class="hero-name">Sanchit Pandey</h1>
+    <div class="hero-pub-badge">First-author · ACL ARR 2026 · arXiv:2603.11513</div>
     <p class="hero-tagline">
       <span id="typedTarget"></span><span class="typed-cursor">|</span>
     </p>
@@ -991,7 +1166,7 @@ a:hover { opacity: 0.8; }
         View Projects
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
       </a>
-      <a href="https://drive.google.com/file/d/1YCLvVDsk5NSQ5TTLRg0Fh4CVrtzE5PHc/view?usp=sharing" target="_blank" rel="noopener" class="btn btn-secondary">
+      <a href="https://drive.google.com/file/d/169rtnwikrRGCV8C7Y9Ob58Da0UD6L-cl/view?usp=drive_link" target="_blank" rel="noopener" class="btn btn-secondary">
         Download Resume
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
       </a>
@@ -1006,6 +1181,9 @@ a:hover { opacity: 0.8; }
       <a href="mailto:sanchitpandey72@gmail.com" class="social-link" aria-label="Email">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
       </a>
+      <a href="https://arxiv.org/abs/2603.11513" target="_blank" rel="noopener" class="social-link" aria-label="arXiv">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -1015,55 +1193,54 @@ a:hover { opacity: 0.8; }
   <div class="container">
     <div class="reveal">
       <p class="section-label">01 / About</p>
-      <h2 class="section-title">Building across the stack</h2>
+      <h2 class="section-title">Building at the frontier of ML</h2>
     </div>
     <div class="about-grid">
       <div class="about-text reveal reveal-delay-1">
         <p>
-          I'm a final-year student at <span class="highlight">BITS Pilani</span> who builds across the stack — from production Go APIs and Flutter mobile apps to RL training pipelines and multimodal retrieval systems.
+          I'm a final-year student at <span class="highlight">BITS Pilani</span> focused on LLM research and production AI systems. My first-author paper on <span class="highlight">RAG utilization failure in sub-7B models</span> is under review at ACL ARR 2026.
         </p>
         <p>
-          I care about writing software that's <span class="highlight">well-engineered and actually solves problems</span>. Whether it's cutting backend latency by 15% at Indiamart, training self-improving LLMs at Genpact, or building a campus bike-sharing app that hit 90% utilization — I like shipping things that work.
+          On the engineering side, I've built <span class="highlight">Dual-PPO RLHF systems</span> by modifying TRL internals, production hybrid retrieval pipelines with FAISS + BM25 + LightGBM re-ranking, and full-stack backends in Go and FastAPI that ship in production.
         </p>
         <p>
-          Currently building a <span class="highlight">multimodal AI platform</span> for India's Ministry of MSME, integrating multilingual ASR, OCR, and hybrid retrieval to connect small businesses with government procurement networks.
+          Currently building a <span class="highlight">multimodal AI platform</span> for India's Ministry of MSME integrating multilingual ASR, OCR, and hybrid retrieval to connect small businesses with government procurement networks.
         </p>
       </div>
       <div class="skills-container reveal reveal-delay-2">
         <h3>Tech Stack</h3>
+        <div class="skill-category">
+          <div class="skill-category-label">ML / AI</div>
+          <div class="skill-tags">
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">HuggingFace TRL</span>
+            <span class="skill-tag">BitsAndBytes</span>
+            <span class="skill-tag">FAISS</span>
+            <span class="skill-tag">LangChain</span>
+            <span class="skill-tag">scikit-learn</span>
+            <span class="skill-tag">AzureML</span>
+          </div>
+        </div>
         <div class="skill-category">
           <div class="skill-category-label">Languages</div>
           <div class="skill-tags">
             <span class="skill-tag">Python</span>
             <span class="skill-tag">Go</span>
             <span class="skill-tag">C++</span>
-            <span class="skill-tag">Dart</span>
             <span class="skill-tag">JavaScript</span>
             <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Dart</span>
           </div>
         </div>
         <div class="skill-category">
           <div class="skill-category-label">Backend & Databases</div>
           <div class="skill-tags">
-            <span class="skill-tag">Node.js</span>
             <span class="skill-tag">FastAPI</span>
-            <span class="skill-tag">Sails.js</span>
+            <span class="skill-tag">Node.js</span>
             <span class="skill-tag">PostgreSQL</span>
             <span class="skill-tag">MongoDB</span>
             <span class="skill-tag">Redis</span>
             <span class="skill-tag">Firebase</span>
-          </div>
-        </div>
-        <div class="skill-category">
-          <div class="skill-category-label">ML / AI</div>
-          <div class="skill-tags">
-            <span class="skill-tag">PyTorch</span>
-            <span class="skill-tag">scikit-learn</span>
-            <span class="skill-tag">FAISS</span>
-            <span class="skill-tag">LangChain</span>
-            <span class="skill-tag">AzureML</span>
-            <span class="skill-tag">HuggingFace</span>
           </div>
         </div>
         <div class="skill-category">
@@ -1073,7 +1250,6 @@ a:hover { opacity: 0.8; }
             <span class="skill-tag">React</span>
             <span class="skill-tag">Next.js</span>
             <span class="skill-tag">TailwindCSS</span>
-            <span class="skill-tag">DeepAR SDK</span>
           </div>
         </div>
         <div class="skill-category">
@@ -1090,11 +1266,53 @@ a:hover { opacity: 0.8; }
   </div>
 </section>
 
+<!-- ═══ PUBLICATIONS ═══ -->
+<section class="publications" id="publications">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">02 / Research</p>
+      <h2 class="section-title">First-author publication</h2>
+    </div>
+    <div class="pub-card reveal reveal-delay-1">
+      <div class="pub-status">Under review · ACL ARR 2026</div>
+      <h3 class="pub-title">Can Small Language Models Use What They Retrieve? An Empirical Study of Retrieval Utilization Across Model Scale</h3>
+      <p class="pub-authors"><strong>Sanchit Pandey</strong> &nbsp;·&nbsp; arXiv:2603.11513 &nbsp;·&nbsp; March 2026</p>
+      <p class="pub-abstract">
+        Demonstrates a net-negative exact match trade-off for sub-7B models under RAG — showing that simply adding retrieval can hurt smaller models. Introduces a parametric knowledge split that isolates <em>utilization failure</em> from retrieval quality, tested across 5 models (360M–8B), 3 architecture families, and oracle/BM25/dense conditions on 1,000 QA pairs.
+      </p>
+      <div class="pub-findings">
+        <div class="pub-finding">
+          <div class="finding-stat">5 models</div>
+          <div class="finding-desc">360M–8B range, spanning 3 distinct architecture families</div>
+        </div>
+        <div class="pub-finding">
+          <div class="finding-stat">2,588</div>
+          <div class="finding-desc">Oracle failures classified into 6 error categories</div>
+        </div>
+        <div class="pub-finding">
+          <div class="finding-stat">61–100%</div>
+          <div class="finding-desc">Irrelevant generation — the dominant failure mode across scales</div>
+        </div>
+      </div>
+      <div class="pub-links">
+        <a href="https://arxiv.org/abs/2603.11513" target="_blank" rel="noopener" class="pub-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          arXiv Paper
+        </a>
+        <a href="https://github.com/sanchitpandey/rag-utilization-study" target="_blank" rel="noopener" class="pub-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Code & Data
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ EXPERIENCE ═══ -->
 <section class="experience" id="experience">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">02 / Experience</p>
+      <p class="section-label">03 / Experience</p>
       <h2 class="section-title">Where I've shipped code</h2>
     </div>
     <div class="exp-timeline">
@@ -1107,9 +1325,10 @@ a:hover { opacity: 0.8; }
         </div>
         <div class="exp-dates">Jul 2025 – Dec 2025 · Bengaluru</div>
         <ul class="exp-bullets">
-          <li>Engineered a self-improving LLM training system by extending the Absolute Zero Reasoner framework to NLP; built a custom Dual-PPO pipeline with reward injection, achieving ~30% gains on sarcasm detection</li>
-          <li>Built end-to-end benchmarking pipeline for 6 summarization models on CNN/DailyMail with automated ROUGE evaluation using Python, PyTorch, and AzureML</li>
-          <li>Developed AI systems integrating DeepSeek OCR, Hierarchical Reasoning, and knowledge graph construction for procurement analytics</li>
+          <li>Adapted the Absolute Zero Reasoner (AZR) from code tasks to NLP by replacing deterministic checks with an LLM-as-a-judge, enabling self-play training for sarcasm detection and NER without labeled data</li>
+          <li>Achieved ~30% relative improvement within 8 self-play iterations; redesigned AZR to a Dual-PPO setup with custom reward injection by modifying TRL PPO internals to mitigate reward hacking and model collapse</li>
+          <li>Benchmarked 5 extractive (Lead-3, TF-IDF, SumBasic, TextRank, LexRank) and 1 abstractive (BART) summarization baseline on CNN/DailyMail; evaluated end-to-end pipeline on ROUGE-1/2/L/Lsum</li>
+          <li>Developed AI systems integrating DeepSeek OCR, hierarchical reasoning, and knowledge graph construction for procurement analytics</li>
         </ul>
         <div class="exp-tags">
           <span class="exp-tag">Python</span>
@@ -1129,8 +1348,8 @@ a:hover { opacity: 0.8; }
         </div>
         <div class="exp-dates">May 2025 – Jul 2025</div>
         <ul class="exp-bullets">
-          <li>Delivered production backend endpoints and API improvements for Pooraa (business management software) using Go, Sails.js, and PostgreSQL</li>
-          <li>Collaborated with a 5-member team to debug, optimize, and reduce backend API latency by 15%</li>
+          <li>Delivered production backend endpoints for Pooraa (business management software) using Go, Sails.js, and PostgreSQL</li>
+          <li>Reduced API latency by 15% across a 5-member team through targeted debugging and streamlined testing workflows</li>
         </ul>
         <div class="exp-tags">
           <span class="exp-tag">Go</span>
@@ -1149,30 +1368,12 @@ a:hover { opacity: 0.8; }
         </div>
         <div class="exp-dates">May 2024 – Aug 2024</div>
         <ul class="exp-bullets">
-          <li>Designed and automated Python ETL pipelines to process 7 years of financial data; improved allocation efficiency by 25% through anomaly detection</li>
+          <li>Designed and automated Python ETL pipelines processing 7 years of financial data; performed anomaly detection and data validation, improving allocation efficiency by 25%</li>
         </ul>
         <div class="exp-tags">
           <span class="exp-tag">Python</span>
           <span class="exp-tag">pandas</span>
           <span class="exp-tag">Jupyter</span>
-        </div>
-      </div>
-
-      <!-- Joyn -->
-      <div class="exp-card reveal reveal-delay-4">
-        <div class="exp-header">
-          <span class="exp-company">Joyn Social Media</span>
-          <span class="exp-role">Flutter Developer</span>
-        </div>
-        <div class="exp-dates">Oct 2021 – Jan 2022</div>
-        <ul class="exp-bullets">
-          <li>Built MVP during a hackathon, securing $50k in Segment credits and subsequent capital investment</li>
-          <li>Developed cross-platform social media app with customizable feed algorithm controlled by user sliders</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">Flutter</span>
-          <span class="exp-tag">Dart</span>
-          <span class="exp-tag">Firebase</span>
         </div>
       </div>
 
@@ -1184,7 +1385,7 @@ a:hover { opacity: 0.8; }
 <section class="projects" id="projects">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">03 / Projects</p>
+      <p class="section-label">04 / Projects</p>
       <h2 class="section-title">Things I've built</h2>
     </div>
 
@@ -1202,7 +1403,7 @@ a:hover { opacity: 0.8; }
       <div class="proj-details">
         <ul>
           <li>Integrated Whisper ASR for multilingual speech input, DeepSeek OCR for automated form-filling, and a hybrid retrieval pipeline (FAISS + BM25)</li>
-          <li>LightGBM LambdaRank re-ranker using Haversine geographic distance and semantic similarity scores</li>
+          <li>LightGBM LambdaRank re-ranker using Haversine geographic distance and semantic similarity scores for buyer-seller mapping</li>
           <li>Designed independently deployable components with structured API contracts</li>
         </ul>
       </div>
@@ -1275,7 +1476,7 @@ a:hover { opacity: 0.8; }
         </div>
         <div class="proj-links">
           <a href="https://github.com/sanchitpandey/ebike-flutter" target="_blank" rel="noopener" class="proj-link">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
         </div>
@@ -1284,7 +1485,7 @@ a:hover { opacity: 0.8; }
       <!-- DeepFake -->
       <div class="project-card reveal">
         <h4>DeepFake Detection Pipeline</h4>
-        <p class="proj-desc">CNN + ResNet50 fine-tuning with Error Level Analysis preprocessing. Augmentation, Early Stopping, Dropout, and Batch Normalization.</p>
+        <p class="proj-desc">CNN + ResNet50 fine-tuning with Error Level Analysis preprocessing on a mixed synthetic/real dataset. Augmentation, Early Stopping, Dropout, and Batch Normalization.</p>
         <p class="proj-metric">80.12% test accuracy</p>
         <div class="proj-tags">
           <span class="proj-tag">Python</span>
@@ -1325,7 +1526,7 @@ a:hover { opacity: 0.8; }
 <section class="leadership" id="leadership">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">04 / Beyond Code</p>
+      <p class="section-label">05 / Beyond Code</p>
       <h2 class="section-title">Leadership & Achievements</h2>
     </div>
     <div class="leadership-grid">
@@ -1347,12 +1548,12 @@ a:hover { opacity: 0.8; }
 <section class="contact" id="contact">
   <div class="container">
     <div class="reveal">
-      <p class="section-label">05 / Contact</p>
+      <p class="section-label">06 / Contact</p>
       <h2 class="section-title">Let's connect</h2>
     </div>
     <div class="contact-inner reveal reveal-delay-1">
       <p>
-        I'm open to Software Engineer, ML Engineer, and Data Scientist roles starting mid-2026. If you're building something interesting or just want to talk tech, I'd love to hear from you.
+        I'm open to AI/ML Engineer, Research Engineer, and Software Engineer roles starting mid-2026. If you're working on LLMs, retrieval systems, or production ML infrastructure — I'd love to hear from you.
       </p>
       <div class="contact-links">
         <a href="mailto:sanchitpandey72@gmail.com" class="contact-link">
@@ -1366,6 +1567,10 @@ a:hover { opacity: 0.8; }
         <a href="https://github.com/sanchitpandey" target="_blank" rel="noopener" class="contact-link">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           github.com/sanchitpandey
+        </a>
+        <a href="https://arxiv.org/abs/2603.11513" target="_blank" rel="noopener" class="contact-link">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+          arXiv:2603.11513
         </a>
       </div>
       <p class="contact-note">Based in Hyderabad, India — open to relocating.</p>
@@ -1383,14 +1588,14 @@ a:hover { opacity: 0.8; }
 <script>
 // ── Typing Effect ──
 (function() {
-  const text = "Software Engineer. I build backend systems, mobile apps, and ML infrastructure.";
+  const text = "AI/ML Engineer & Researcher. I build LLM training systems, production retrieval pipelines, and full-stack backends.";
   const target = document.getElementById('typedTarget');
   let i = 0;
   function type() {
     if (i < text.length) {
       target.textContent += text.charAt(i);
       i++;
-      setTimeout(type, 32);
+      setTimeout(type, 30);
     }
   }
   setTimeout(type, 900);
@@ -1413,7 +1618,6 @@ themeToggle.addEventListener('click', () => {
   setTheme(current === 'dark' ? 'light' : 'dark');
 });
 
-// Restore saved theme
 const saved = localStorage.getItem('theme');
 if (saved) setTheme(saved);
 
@@ -1425,7 +1629,6 @@ mobileToggle.addEventListener('click', () => {
   navLinks.classList.toggle('open');
 });
 
-// Close mobile nav on link click
 navLinks.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('open'));
 });
